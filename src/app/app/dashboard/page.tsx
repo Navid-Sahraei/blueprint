@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
+import type { ComponentType } from "react";
 import Link from "next/link";
 
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
+import { OkrStat } from "@/components/okrs/okr-stat";
 import { Badge } from "@/components/ui/badge";
 import { LAYERS, methodsByLayer } from "@/lib/methods";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Dashboard" };
+
+/** Modules with a built interior: dashboard card links in and shows a live stat. */
+const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
+  "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
+  "annual-okrs": { href: "/app/goals", Stat: OkrStat },
+};
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -43,47 +51,52 @@ export default async function DashboardPage() {
                 </h2>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {methodsByLayer(layer.id).map((method) => (
-                  <div
-                    key={method.slug}
-                    className="corner-marks flex flex-col border border-border bg-card p-5"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-medium">{method.name}</h3>
-                      <Badge variant={method.freeTier ? "outline" : "secondary"}>
-                        {method.freeTier ? "Free" : "Pro"}
-                      </Badge>
+                {methodsByLayer(layer.id).map((method) => {
+                  const live = LIVE_MODULES[method.slug];
+                  return (
+                    <div
+                      key={method.slug}
+                      className="corner-marks flex flex-col border border-border bg-card p-5"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="font-medium">{method.name}</h3>
+                        <Badge
+                          variant={method.freeTier ? "outline" : "secondary"}
+                        >
+                          {method.freeTier ? "Free" : "Pro"}
+                        </Badge>
+                      </div>
+                      <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                        {method.tagline}
+                      </p>
+                      <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
+                        {live ? (
+                          <>
+                            <live.Stat />
+                            <Link
+                              href={live.href}
+                              className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
+                            >
+                              Open →
+                            </Link>
+                          </>
+                        ) : (
+                          <>
+                            <span className="measure text-xs text-dimension">
+                              MODULE IN DESIGN
+                            </span>
+                            <Link
+                              href={`/methods/${method.slug}`}
+                              className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
+                            >
+                              About →
+                            </Link>
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                      {method.tagline}
-                    </p>
-                    <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
-                      {method.slug === "habit-foundry" ? (
-                        <>
-                          <HabitFoundryStat />
-                          <Link
-                            href="/app/habits"
-                            className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
-                          >
-                            Open →
-                          </Link>
-                        </>
-                      ) : (
-                        <>
-                          <span className="measure text-xs text-dimension">
-                            MODULE IN DESIGN
-                          </span>
-                          <Link
-                            href={`/methods/${method.slug}`}
-                            className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
-                          >
-                            About →
-                          </Link>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           ))}

@@ -19,6 +19,13 @@ export function mondayOfWeek(d: Date = new Date()): string {
   return todayISO(monday);
 }
 
+/** Shift a quarter label by `delta` quarters, e.g. shiftQuarter("2026-Q1", -1) → "2025-Q4". */
+export function shiftQuarter(quarter: string, delta: number): string {
+  const [year, q] = quarter.split("-Q").map(Number);
+  const index = year * 4 + (q - 1) + delta;
+  return `${Math.floor(index / 4)}-Q${(index % 4) + 1}`;
+}
+
 /** Whole days from an ISO date to `to` (0 on the same day). */
 export function daysBetween(fromISO: string, to: Date = new Date()): number {
   const from = new Date(`${fromISO}T00:00:00`);

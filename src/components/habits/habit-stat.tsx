@@ -3,11 +3,19 @@
 import { useSyncExternalStore } from "react";
 
 import { daysBetween } from "@/lib/dates";
-import { getHabits, getServerSnapshot, subscribe } from "@/lib/habits/store";
+import {
+  getHabits,
+  getServerSnapshot,
+  subscribeHabits,
+} from "@/lib/habits/store";
 
 /** Live one-line stat for the dashboard's Habit Foundry card. */
 export function HabitFoundryStat() {
-  const habits = useSyncExternalStore(subscribe, getHabits, getServerSnapshot);
+  const habits = useSyncExternalStore(
+    subscribeHabits,
+    getHabits,
+    getServerSnapshot,
+  );
 
   let text = "…";
   if (habits !== null) {

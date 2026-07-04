@@ -9,7 +9,8 @@ import {
   getServerSnapshot,
   replaceHabits,
   replaceReviews,
-  subscribe,
+  subscribeHabits,
+  subscribeReviews,
 } from "./store";
 import type {
   Habit,
@@ -30,12 +31,12 @@ function patchHabit(id: string, patch: Partial<Habit>): void {
 
 export function useHabits() {
   const habitsSnap = useSyncExternalStore(
-    subscribe,
+    subscribeHabits,
     getHabits,
     getServerSnapshot,
   );
   const reviewsSnap = useSyncExternalStore(
-    subscribe,
+    subscribeReviews,
     getReviews,
     getServerSnapshot,
   );
