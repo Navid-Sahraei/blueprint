@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { Badge } from "@/components/ui/badge";
 import { LAYERS, methodsByLayer } from "@/lib/methods";
 import { createClient } from "@/lib/supabase/server";
@@ -56,16 +57,30 @@ export default async function DashboardPage() {
                     <p className="mt-2 flex-1 text-sm text-muted-foreground">
                       {method.tagline}
                     </p>
-                    <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-                      <span className="measure text-xs text-dimension">
-                        MODULE IN DESIGN
-                      </span>
-                      <Link
-                        href={`/methods/${method.slug}`}
-                        className="text-sm text-primary underline-offset-4 hover:underline"
-                      >
-                        About →
-                      </Link>
+                    <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
+                      {method.slug === "habit-foundry" ? (
+                        <>
+                          <HabitFoundryStat />
+                          <Link
+                            href="/app/habits"
+                            className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
+                          >
+                            Open →
+                          </Link>
+                        </>
+                      ) : (
+                        <>
+                          <span className="measure text-xs text-dimension">
+                            MODULE IN DESIGN
+                          </span>
+                          <Link
+                            href={`/methods/${method.slug}`}
+                            className="shrink-0 text-sm text-primary underline-offset-4 hover:underline"
+                          >
+                            About →
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}
