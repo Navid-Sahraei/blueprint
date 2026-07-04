@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import Link from "next/link";
 
 import { AdventureStat } from "@/components/adventures/adventure-stat";
+import { DeepWorkStat } from "@/components/deepwork/deep-work-stat";
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { MisogiStat } from "@/components/misogi/misogi-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
@@ -21,6 +22,7 @@ const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
   misogi: { href: "/app/misogi", Stat: MisogiStat },
   "adventure-ledger": { href: "/app/adventures", Stat: AdventureStat },
+  "deep-work": { href: "/app/deep-work", Stat: DeepWorkStat },
   woop: { href: "/app/woop", Stat: WoopStat },
 };
 

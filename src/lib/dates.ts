@@ -26,6 +26,16 @@ export function shiftQuarter(quarter: string, delta: number): string {
   return `${Math.floor(index / 4)}-Q${(index % 4) + 1}`;
 }
 
+/** The 7 ISO dates of the week starting at `mondayISO`. */
+export function weekDates(mondayISO: string): string[] {
+  const start = new Date(`${mondayISO}T00:00:00`);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i);
+    return todayISO(d);
+  });
+}
+
 /** Whole days from `from` until an ISO date — negative once it has passed. */
 export function daysUntil(iso: string, from: Date = new Date()): number {
   const target = new Date(`${iso}T00:00:00`);
