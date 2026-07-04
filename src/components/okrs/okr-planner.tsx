@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 
 import { ModuleHeader } from "@/components/module-header";
 import { KeyResultRow } from "@/components/okrs/key-result-row";
@@ -9,8 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { currentQuarter, shiftQuarter } from "@/lib/dates";
+import { getServerSnapshot } from "@/lib/local-store";
 import { KR_MAX, objectiveProgress } from "@/lib/okrs/types";
 import { useOkrs } from "@/lib/okrs/use-okrs";
+import { getReviews, subscribeReviews } from "@/lib/review/store";
+import { parseReflection } from "@/lib/review/types";
 import { cn } from "@/lib/utils";
 
 function ObjectiveForm({
@@ -166,6 +169,31 @@ export function OkrPlanner() {
   const pct = Math.round(objectiveProgress(krs) * 100);
   const year = quarter.split("-Q")[0];
 
+  // Cadence made visible: the newest key-result touch is the last check-in.
+  const lastCheckIn =
+    krs.length > 0
+      ? krs.reduce(
+          (max, kr) => (kr.updated_at > max ? kr.updated_at : max),
+          krs[0].updated_at,
+        )
+      : null;
+
+  // Kolb's cycle, closed: the last review's "one change" greets the next
+  // quarter's objective.
+  const reviewsSnap = useSyncExternalStore(
+    subscribeReviews,
+    getReviews,
+    getServerSnapshot,
+  );
+  const lastReviewChange = useMemo(() => {
+    const latest = [...(reviewsSnap ?? [])].sort((a, b) =>
+      b.created_at.localeCompare(a.created_at),
+    )[0];
+    if (!latest) return null;
+    const change = parseReflection(latest.reflection_text).change;
+    return change ? { period: latest.period_label, change } : null;
+  }, [reviewsSnap]);
+
   function handleCreate(text: string) {
     setError(createObjective(quarter, text));
   }
@@ -275,6 +303,7 @@ export function OkrPlanner() {
                 </div>
                 <p className="measure text-xs text-dimension">
                   PROGRESS {pct}%
+                  {lastCheckIn && ` · CHECKED ${lastCheckIn.slice(0, 10)}`}
                 </p>
               </div>
 
@@ -293,12 +322,25 @@ export function OkrPlanner() {
                   <h2 className="mt-2 font-mono text-2xl font-semibold text-primary">
                     {objective.objective_text}
                   </h2>
-                  <div className="mt-4 h-1.5 w-full bg-muted" aria-hidden>
+                  <div
+                    className="relative mt-4 h-1.5 w-full bg-muted"
+                    aria-hidden
+                  >
                     <div
                       className="h-full bg-accent"
                       style={{ width: `${pct}%` }}
                     />
+                    {/* Stretch mark: ~70% on a stretch objective is success. */}
+                    <div
+                      className="absolute left-[70%] top-[-3px] h-3 w-px bg-dimension"
+                      title="≈70% on a stretch objective counts as success (Doerr, 2018)"
+                    />
                   </div>
+                  <p className="mt-1.5 text-xs text-muted-foreground">
+                    The tick sits at 70% — on a genuine stretch objective
+                    that&rsquo;s success. Routinely finishing at 100% means
+                    the target was set too low (Doerr, 2018).
+                  </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Button
                       size="sm"
@@ -395,6 +437,14 @@ export function OkrPlanner() {
                 <p role="alert" className="mt-2 text-sm text-destructive">
                   {error}
                 </p>
+              )}
+              {lastReviewChange && (
+                <div className="mt-4 max-w-xl border-l-2 border-accent bg-secondary/50 p-3">
+                  <p className="label-technical mb-1">
+                    From your {lastReviewChange.period} review
+                  </p>
+                  <p className="text-sm">“{lastReviewChange.change}”</p>
+                </div>
               )}
               <ObjectiveForm quarter={quarter} onSave={handleCreate} />
             </section>

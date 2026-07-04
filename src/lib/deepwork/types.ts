@@ -8,6 +8,7 @@
 export interface DeepWorkSession {
   id: string;
   date: string; // ISO date
+  start_time: string | null; // "HH:MM" — blocks belong to hours, not just days
   planned_duration: number; // minutes
   actual_duration: number | null; // minutes
   task_description: string;

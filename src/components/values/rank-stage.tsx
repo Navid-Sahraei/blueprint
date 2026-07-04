@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import type { SortDraft } from "@/lib/values/types";
 import { pileNames, VALUES_MAX, VALUES_MIN } from "@/lib/values/types";
 import { cn } from "@/lib/utils";
@@ -38,9 +41,26 @@ export function RankStage({
   draft: SortDraft;
   onChange: (next: SortDraft) => void;
 }) {
+  const [custom, setCustom] = useState("");
   const core = pileNames(draft, "core").filter(
     (n) => !draft.ranked.includes(n),
   );
+
+  function addCustom(e: React.FormEvent) {
+    e.preventDefault();
+    const name = custom.trim();
+    if (!name) return;
+    const exists = draft.history.some(
+      (h) => h.name.toLowerCase() === name.toLowerCase(),
+    );
+    if (!exists) {
+      onChange({
+        ...draft,
+        history: [...draft.history, { name, pile: "core" }],
+      });
+    }
+    setCustom("");
+  }
   const matters = pileNames(draft, "matters").filter(
     (n) => !draft.ranked.includes(n),
   );
@@ -162,6 +182,20 @@ export function RankStage({
           </div>
         </div>
       )}
+
+      {/* The deck is 36 cards, not the universe of values. */}
+      <form onSubmit={addCustom} className="mt-6 flex max-w-sm gap-2">
+        <Input
+          aria-label="Add your own value"
+          placeholder="A value the deck missed"
+          value={custom}
+          onChange={(e) => setCustom(e.target.value)}
+          className="h-8 text-sm"
+        />
+        <Button type="submit" size="sm" variant="outline">
+          Add your own
+        </Button>
+      </form>
 
       <div className="mt-8 flex flex-wrap gap-3">
         <Button

@@ -24,6 +24,8 @@ export interface PracticeSession {
   duration_minutes: number;
   sub_skill_focus: string;
   feedback_notes: string;
+  /** Closes Ericsson's loop: what the next session will adjust or work on. */
+  next_focus: string;
   difficulty_rating: number; // 1–5, relative to current level
   created_at: string;
   updated_at: string;

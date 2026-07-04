@@ -49,9 +49,10 @@ export function DeepWorkModule() {
                 weekDates={days}
                 sessions={weekSessions}
                 running={running}
-                onAdd={(date, task, plannedDuration) =>
+                onAdd={(date, task, plannedDuration, startTime) =>
                   addSession({
                     date,
+                    start_time: startTime,
                     task_description: task,
                     planned_duration: plannedDuration,
                   })

@@ -58,6 +58,7 @@ function DayColumn({
             <div key={s.id} className="border border-border bg-background p-2.5">
               <p className="text-sm font-medium">{s.task_description}</p>
               <p className="measure mt-0.5 text-[10px] text-dimension">
+                {s.start_time ? `${s.start_time} · ` : ""}
                 {done
                   ? `${s.actual_duration}MIN · FOCUS ${s.focus_rating}/5`
                   : `PLANNED ${s.planned_duration}MIN`}
@@ -153,7 +154,12 @@ export function WeekPlanner({
   weekDates: string[];
   sessions: DeepWorkSession[];
   running: { id: string; startedAt: number } | null;
-  onAdd: (date: string, task: string, planned: number) => void;
+  onAdd: (
+    date: string,
+    task: string,
+    planned: number,
+    startTime: string | null,
+  ) => void;
   onStart: (id: string) => void;
   onStop: (id: string) => void;
   onManualComplete: (id: string, minutes: number, focus: number) => void;
@@ -162,17 +168,19 @@ export function WeekPlanner({
   const [date, setDate] = useState(todayISO());
   const [task, setTask] = useState("");
   const [planned, setPlanned] = useState<number>(PLANNED_DURATIONS[1]);
+  const [startTime, setStartTime] = useState("");
   const today = todayISO();
 
   return (
     <div className="space-y-5">
       <form
-        className="corner-marks grid gap-3 border border-border bg-card p-5 sm:grid-cols-[9rem_1fr_9rem_auto]"
+        className="corner-marks grid gap-3 border border-border bg-card p-5 sm:grid-cols-[9rem_1fr_8rem_8rem_auto]"
         onSubmit={(e) => {
           e.preventDefault();
           if (!task.trim()) return;
-          onAdd(date, task.trim(), planned);
+          onAdd(date, task.trim(), planned, startTime || null);
           setTask("");
+          setStartTime("");
         }}
       >
         <div className="space-y-1.5">
@@ -198,6 +206,18 @@ export function WeekPlanner({
             placeholder="Draft the chapter, not “work on book”"
             value={task}
             onChange={(e) => setTask(e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="block-time">
+            Start <span className="text-muted-foreground">(opt.)</span>
+          </Label>
+          <input
+            id="block-time"
+            type="time"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            className="flex h-10 w-full rounded-sm border border-input bg-paper-raised px-2 text-sm"
           />
         </div>
         <div className="space-y-1.5">
@@ -231,7 +251,14 @@ export function WeekPlanner({
             isToday={d === today}
             sessions={sessions
               .filter((s) => s.date === d)
-              .sort((a, b) => a.created_at.localeCompare(b.created_at))}
+              .sort((a, b) => {
+                // Timed blocks first, in day order; untimed after, by entry.
+                if (a.start_time && b.start_time)
+                  return a.start_time.localeCompare(b.start_time);
+                if (a.start_time) return -1;
+                if (b.start_time) return 1;
+                return a.created_at.localeCompare(b.created_at);
+              })}
             running={running}
             onStart={onStart}
             onStop={onStop}

@@ -18,6 +18,7 @@ export function useDeepWork() {
   const addSession = useCallback(
     (fields: {
       date: string;
+      start_time: string | null;
       task_description: string;
       planned_duration: number;
     }) => {

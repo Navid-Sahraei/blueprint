@@ -88,6 +88,7 @@ export function usePractice() {
         duration_minutes: number;
         sub_skill_focus: string;
         feedback_notes: string;
+        next_focus: string;
         difficulty_rating: number;
       },
     ) => {

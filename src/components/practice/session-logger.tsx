@@ -24,6 +24,7 @@ export function SessionLogger({
     duration_minutes: number;
     sub_skill_focus: string;
     feedback_notes: string;
+    next_focus: string;
     difficulty_rating: number;
   }) => void;
 }) {
@@ -31,6 +32,7 @@ export function SessionLogger({
   const [duration, setDuration] = useState("30");
   const [subSkill, setSubSkill] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [nextFocus, setNextFocus] = useState("");
   const [difficulty, setDifficulty] = useState(3);
 
   return (
@@ -45,10 +47,12 @@ export function SessionLogger({
           duration_minutes: Math.round(mins),
           sub_skill_focus: subSkill.trim(),
           feedback_notes: feedback.trim(),
+          next_focus: nextFocus.trim(),
           difficulty_rating: difficulty,
         });
         setSubSkill("");
         setFeedback("");
+        setNextFocus("");
         setDuration("30");
         setDifficulty(3);
         setDate(todayISO());
@@ -88,14 +92,28 @@ export function SessionLogger({
         </div>
       </div>
 
-      <div className="space-y-1.5">
-        <Label htmlFor="session-feedback">Feedback received</Label>
-        <Input
-          id="session-feedback"
-          placeholder="Teacher said the transitions rush — slow the left hand"
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
-        />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-1.5">
+          <Label htmlFor="session-feedback">Feedback received</Label>
+          <Input
+            id="session-feedback"
+            placeholder="Teacher said the transitions rush"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="session-next">
+            Next session&rsquo;s adjustment{" "}
+            <span className="text-muted-foreground">(optional)</span>
+          </Label>
+          <Input
+            id="session-next"
+            placeholder="Slow the left hand to 60bpm first"
+            value={nextFocus}
+            onChange={(e) => setNextFocus(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="space-y-1.5">
@@ -146,6 +164,11 @@ export function SessionHistory({ sessions }: { sessions: PracticeSession[] }) {
           {s.feedback_notes && (
             <p className="mt-0.5 text-sm text-muted-foreground">
               {s.feedback_notes}
+            </p>
+          )}
+          {s.next_focus && (
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              Next: {s.next_focus}
             </p>
           )}
         </li>
