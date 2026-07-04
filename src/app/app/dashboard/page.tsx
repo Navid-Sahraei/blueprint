@@ -6,6 +6,7 @@ import { AdventureStat } from "@/components/adventures/adventure-stat";
 import { DeepWorkStat } from "@/components/deepwork/deep-work-stat";
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { MisogiStat } from "@/components/misogi/misogi-stat";
+import { PracticeStat } from "@/components/practice/practice-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
 import { ValuesStat } from "@/components/values/values-stat";
 import { WoopStat } from "@/components/woop/woop-stat";
@@ -24,6 +25,7 @@ const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "adventure-ledger": { href: "/app/adventures", Stat: AdventureStat },
   "deep-work": { href: "/app/deep-work", Stat: DeepWorkStat },
   woop: { href: "/app/woop", Stat: WoopStat },
+  "deliberate-practice": { href: "/app/practice", Stat: PracticeStat },
 };
 
 export default async function DashboardPage() {

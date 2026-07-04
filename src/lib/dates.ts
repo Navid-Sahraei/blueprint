@@ -19,6 +19,11 @@ export function mondayOfWeek(d: Date = new Date()): string {
   return todayISO(monday);
 }
 
+/** e.g. "2026-07" */
+export function currentMonth(d: Date = new Date()): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+}
+
 /** Shift a quarter label by `delta` quarters, e.g. shiftQuarter("2026-Q1", -1) → "2025-Q4". */
 export function shiftQuarter(quarter: string, delta: number): string {
   const [year, q] = quarter.split("-Q").map(Number);
