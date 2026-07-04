@@ -33,7 +33,7 @@ export function SiteHeader() {
             Log in
           </Link>
           <Link
-            href="/signup"
+            href="/app/dashboard"
             className={cn(
               buttonVariants({ variant: "accent", size: "sm" }),
               "hidden sm:inline-flex",

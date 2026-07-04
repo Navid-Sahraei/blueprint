@@ -113,7 +113,7 @@ export default async function MethodPage({
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="/signup"
+              href="/app/dashboard"
               className={cn(buttonVariants({ variant: "accent" }))}
             >
               {method.freeTier

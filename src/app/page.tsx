@@ -30,7 +30,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="/signup"
+                href="/app/dashboard"
                 className={cn(buttonVariants({ variant: "accent", size: "lg" }))}
               >
                 Start your year

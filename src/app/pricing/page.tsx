@@ -66,7 +66,7 @@ export default function PricingPage() {
                 ))}
               </ul>
               <Link
-                href="/signup"
+                href="/app/dashboard"
                 className={cn(
                   buttonVariants({ variant: "outline" }),
                   "mt-8 w-full",
@@ -100,7 +100,7 @@ export default function PricingPage() {
                 ))}
               </ul>
               <Link
-                href="/signup"
+                href="/app/dashboard"
                 className={cn(
                   buttonVariants({ variant: "accent" }),
                   "mt-8 w-full",

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 
-import { AuthForm } from "@/components/auth-form";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Create your account" };
+
+// Signups are closed while AUTH_REQUIRED (src/lib/flags.ts) is false.
+// Restore the AuthForm below when re-enabling auth.
 
 export default function SignupPage() {
   return (
@@ -17,14 +20,18 @@ export default function SignupPage() {
           Blueprint
         </Link>
         <h1 className="mt-6 font-mono text-xl font-semibold text-primary">
-          Create your account
+          Signups are closed for now
         </h1>
         <p className="mb-6 mt-1 text-sm text-muted-foreground">
-          Free tier included — no card required.
+          The app is still in development. Jump straight into the dashboard
+          below — no account needed yet.
         </p>
-        <Suspense>
-          <AuthForm mode="signup" />
-        </Suspense>
+        <Link
+          href="/app/dashboard"
+          className={cn(buttonVariants({ variant: "accent" }), "w-full")}
+        >
+          Go to dashboard
+        </Link>
       </div>
     </main>
   );

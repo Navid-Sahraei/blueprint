@@ -1,12 +1,16 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
+import { AUTH_REQUIRED } from "@/lib/flags";
+
 /**
  * Refreshes the Supabase session and gates /app/* behind auth.
- * When Supabase env vars are absent (local dev before a project is
- * connected), /app stays reachable so the shell can be developed.
+ * When Supabase env vars are absent, or AUTH_REQUIRED is false, /app
+ * stays reachable so the app can be exercised without signing in.
  */
 export async function proxy(request: NextRequest) {
+  if (!AUTH_REQUIRED) return NextResponse.next();
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anonKey) return NextResponse.next();
