@@ -26,6 +26,9 @@ export default function AppLayout({
             <Link href="/app/habits" className="hover:text-foreground">
               Habits
             </Link>
+            <Link href="/app/woop" className="hover:text-foreground">
+              WOOP
+            </Link>
             <Link href="/methods" className="hover:text-foreground">
               Methods
             </Link>

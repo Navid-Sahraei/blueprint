@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
 import { ValuesStat } from "@/components/values/values-stat";
+import { WoopStat } from "@/components/woop/woop-stat";
 import { Badge } from "@/components/ui/badge";
 import { LAYERS, methodsByLayer } from "@/lib/methods";
 import { createClient } from "@/lib/supabase/server";
@@ -16,6 +17,7 @@ const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "values-compass": { href: "/app/values", Stat: ValuesStat },
   "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
+  woop: { href: "/app/woop", Stat: WoopStat },
 };
 
 export default async function DashboardPage() {
