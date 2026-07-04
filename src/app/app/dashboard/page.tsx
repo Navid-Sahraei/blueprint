@@ -6,6 +6,7 @@ import { AdventureStat } from "@/components/adventures/adventure-stat";
 import { DeepWorkStat } from "@/components/deepwork/deep-work-stat";
 import { GratitudeStat } from "@/components/gratitude/gratitude-stat";
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
+import { OdysseyStat } from "@/components/lifedesign/odyssey-stat";
 import { MisogiStat } from "@/components/misogi/misogi-stat";
 import { PracticeStat } from "@/components/practice/practice-stat";
 import { ReviewStat } from "@/components/review/review-stat";
@@ -21,6 +22,7 @@ export const metadata: Metadata = { title: "Dashboard" };
 /** Every module's interior route and live dashboard stat. */
 const MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "values-compass": { href: "/app/values", Stat: ValuesStat },
+  "odyssey-plan": { href: "/app/life-design", Stat: OdysseyStat },
   "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
   misogi: { href: "/app/misogi", Stat: MisogiStat },

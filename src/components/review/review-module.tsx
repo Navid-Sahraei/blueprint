@@ -7,7 +7,7 @@ import { ModuleHeader } from "@/components/module-header";
 import { ReflectionForm } from "@/components/review/reflection-form";
 import { SnapshotView } from "@/components/review/snapshot-view";
 import { Button } from "@/components/ui/button";
-import { currentQuarter } from "@/lib/dates";
+import { currentQuarter, shiftQuarter } from "@/lib/dates";
 import { buildSummarySnapshot } from "@/lib/review/snapshot";
 import { parseReflection } from "@/lib/review/types";
 import type { PeriodType, SummarySnapshot } from "@/lib/review/types";
@@ -17,14 +17,22 @@ import { cn } from "@/lib/utils";
 export function ReviewModule() {
   const { ready, reviews, findReview, saveReview } = useReview();
   const [periodType, setPeriodType] = useState<PeriodType>("quarterly");
+  // 0 = the current period; negative reaches back — a quarter stays
+  // reviewable after it ends, which is when reviews actually happen.
+  const [offset, setOffset] = useState(0);
   const [draftSnapshot, setDraftSnapshot] = useState<SummarySnapshot | null>(
     null,
   );
 
   const periodLabel =
     periodType === "quarterly"
-      ? currentQuarter()
-      : String(new Date().getFullYear());
+      ? shiftQuarter(currentQuarter(), offset)
+      : String(new Date().getFullYear() + offset);
+
+  function shiftPeriod(delta: number) {
+    setOffset((o) => Math.min(0, o + delta));
+    setDraftSnapshot(null);
+  }
   const existing = findReview(periodType, periodLabel);
   const history = reviews.filter(
     (r) => !(r.period_type === periodType && r.period_label === periodLabel),
@@ -55,6 +63,7 @@ export function ReviewModule() {
                 type="button"
                 onClick={() => {
                   setPeriodType(t);
+                  setOffset(0);
                   setDraftSnapshot(null);
                 }}
                 className={cn(
@@ -70,11 +79,30 @@ export function ReviewModule() {
           </div>
 
           <section className="corner-marks border border-border bg-card p-6">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="label-technical">
-                {periodType === "quarterly" ? "Quarter" : "Year"} ·{" "}
-                {periodLabel}
-              </p>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  aria-label="Previous period"
+                  onClick={() => shiftPeriod(-1)}
+                >
+                  ‹
+                </Button>
+                <p className="label-technical">
+                  {periodType === "quarterly" ? "Quarter" : "Year"} ·{" "}
+                  {periodLabel}
+                </p>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  aria-label="Next period"
+                  disabled={offset === 0}
+                  onClick={() => shiftPeriod(1)}
+                >
+                  ›
+                </Button>
+              </div>
               {existing && <p className="measure text-xs text-accent">SAVED</p>}
             </div>
 

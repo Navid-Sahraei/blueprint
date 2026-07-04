@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { ModuleHeader } from "@/components/module-header";
 import { KeyResultRow } from "@/components/okrs/key-result-row";
+import { ValuesStrip } from "@/components/okrs/values-strip";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -197,6 +198,8 @@ export function OkrPlanner() {
         <p className="measure text-xs text-dimension">LOADING…</p>
       ) : (
         <>
+          <ValuesStrip />
+
           {/* Year strip */}
           <section>
             <div className="flex items-baseline justify-between gap-2">
