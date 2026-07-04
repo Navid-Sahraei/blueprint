@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
+import { ModuleHeader } from "@/components/module-header";
 import { WoopWizard, type KrOption } from "@/components/woop/woop-wizard";
 import { Button } from "@/components/ui/button";
 import { getServerSnapshot } from "@/lib/local-store";
@@ -40,24 +41,17 @@ export function WoopModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 03 · Execution</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            WOOP / Mental Contrasting
-          </h1>
-          <p className="measure text-xs text-dimension">
-            SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Wish, Outcome, Obstacle, Plan. Mental contrasting with
-          implementation intentions is among the most rigorously tested
-          motivation techniques in the literature, with randomized trials
-          across health, academic, and interpersonal domains (Oettingen,
-          2012). Positive thinking alone is not the method — the obstacle is.
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 03 · Execution"
+        title="WOOP / Mental Contrasting"
+        meta="SAVED IN THIS BROWSER"
+      >
+        Wish, Outcome, Obstacle, Plan. Mental contrasting with
+        implementation intentions is among the most rigorously tested
+        motivation techniques in the literature, with randomized trials
+        across health, academic, and interpersonal domains (Oettingen,
+        2012). Positive thinking alone is not the method — the obstacle is.
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

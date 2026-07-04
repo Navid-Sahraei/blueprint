@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { ModuleHeader } from "@/components/module-header";
 import { KeyResultRow } from "@/components/okrs/key-result-row";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -178,27 +179,19 @@ export function OkrPlanner() {
 
   return (
     <div className="space-y-10">
-      {/* Header */}
-      <header>
-        <p className="label-technical mb-2">Layer 01 · Direction</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Annual Goals / OKRs
-          </h1>
-          <p className="measure text-xs text-dimension">
-            {currentQuarter()} · SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          One objective per quarter, made measurable by two to four key
-          results. The format comes from Andy Grove (High Output Management,
-          1983), popularized by John Doerr (Measure What Matters, 2018). The
-          mechanism underneath is one of the best-replicated findings in
-          organizational psychology: specific, challenging goals reliably
-          outperform vague “do your best” goals — given ability and commitment
-          (Locke &amp; Latham, 2002).
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 01 · Direction"
+        title="Annual Goals / OKRs"
+        meta={`${currentQuarter()} · SAVED IN THIS BROWSER`}
+      >
+        One objective per quarter, made measurable by two to four key
+        results. The format comes from Andy Grove (High Output Management,
+        1983), popularized by John Doerr (Measure What Matters, 2018). The
+        mechanism underneath is one of the best-replicated findings in
+        organizational psychology: specific, challenging goals reliably
+        outperform vague “do your best” goals — given ability and commitment
+        (Locke &amp; Latham, 2002).
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

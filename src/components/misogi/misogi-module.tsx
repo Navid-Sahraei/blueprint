@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { ActiveMisogi } from "@/components/misogi/active-misogi";
 import { CandidateVault } from "@/components/misogi/candidate-vault";
+import { ModuleHeader } from "@/components/module-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { isFinished } from "@/lib/misogi/types";
@@ -32,26 +33,19 @@ export function MisogiModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 02 · Big Moves</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Misogi OS
-          </h1>
-          <p className="measure text-xs text-dimension">
-            SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          One extremely hard challenge a year, with a genuine chance of
-          failure. Mastery experiences are the strongest source of
-          self-efficacy (Bandura, 1977), and moderate adversity predicts
-          better resilience outcomes than none at all (Seery, Holman &amp;
-          Silver, 2010). The modern misogi comes from performance scientist
-          Marcus Elliott, popularized in Michael Easter’s The Comfort Crisis
-          (2021).
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 02 · Big Moves"
+        title="Misogi OS"
+        meta="SAVED IN THIS BROWSER"
+      >
+        One extremely hard challenge a year, with a genuine chance of
+        failure. Mastery experiences are the strongest source of
+        self-efficacy (Bandura, 1977), and moderate adversity predicts
+        better resilience outcomes than none at all (Seery, Holman &amp;
+        Silver, 2010). The modern misogi comes from performance scientist
+        Marcus Elliott, popularized in Michael Easter’s The Comfort Crisis
+        (2021).
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

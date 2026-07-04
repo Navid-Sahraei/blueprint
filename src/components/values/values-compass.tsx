@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { ModuleHeader } from "@/components/module-header";
 import { DefineStage } from "@/components/values/define-stage";
 import { RankStage } from "@/components/values/rank-stage";
 import { SortStage } from "@/components/values/sort-stage";
@@ -68,24 +69,17 @@ export function ValuesCompass() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 01 · Direction</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Values Compass
-          </h1>
-          <p className="measure text-xs text-dimension">
-            SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Three to five values, chosen before any goal. Values clarification
-          is a core component of Acceptance and Commitment Therapy
-          (meta-analysis: A-Tjak et al., 2015), and goals held for your own
-          reasons sustain motivation better than goals imposed from outside
-          (Ryan &amp; Deci, 2000). The sort takes about three minutes.
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 01 · Direction"
+        title="Values Compass"
+        meta="SAVED IN THIS BROWSER"
+      >
+        Three to five values, chosen before any goal. Values clarification
+        is a core component of Acceptance and Commitment Therapy
+        (meta-analysis: A-Tjak et al., 2015), and goals held for your own
+        reasons sustain motivation better than goals imposed from outside
+        (Ryan &amp; Deci, 2000). The sort takes about three minutes.
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

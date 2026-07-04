@@ -1,8 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import type { KeyResult } from "@/lib/okrs/types";
 import { krProgress } from "@/lib/okrs/types";
+import { getDraft, replaceDraft } from "@/lib/woop/store";
+import { freshWoopDraft } from "@/lib/woop/types";
 
 function formatValue(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(1);
@@ -17,7 +21,19 @@ export function KeyResultRow({
   onUpdate: (patch: Partial<KeyResult>) => void;
   onRemove: () => void;
 }) {
+  const router = useRouter();
   const barPct = Math.round(krProgress(kr) * 100);
+
+  function startWoop() {
+    if (
+      getDraft() !== null &&
+      !window.confirm("Replace your in-progress WOOP draft?")
+    ) {
+      return;
+    }
+    replaceDraft({ ...freshWoopDraft(), linked_key_result_id: kr.id });
+    router.push("/app/woop");
+  }
   const realPct =
     kr.target_value > 0
       ? Math.round((kr.current_value / kr.target_value) * 100)
@@ -70,6 +86,14 @@ export function KeyResultRow({
             of {formatValue(kr.target_value)} {kr.unit}
           </span>
         </div>
+        <Button
+          size="sm"
+          variant="ghost"
+          title="Plan around this key result's obstacle in WOOP"
+          onClick={startWoop}
+        >
+          If-then plan →
+        </Button>
         <Button
           size="sm"
           variant="ghost"

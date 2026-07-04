@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { ModuleHeader } from "@/components/module-header";
 import { MonthlyReflectionSection } from "@/components/practice/monthly-reflection";
 import { SessionHistory, SessionLogger } from "@/components/practice/session-logger";
 import { SkillPicker } from "@/components/practice/skill-picker";
@@ -34,25 +35,18 @@ export function PracticeModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 04 · Growth &amp; Mastery</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Deliberate Practice Tracker
-          </h1>
-          <p className="measure text-xs text-dimension">
-            SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Structured, feedback-driven practice toward one skill over the
-          year — distinct from the once-a-year Misogi event; this is a
-          continuous track. Ericsson, Krampe &amp; Tesch-Römer (1993) found
-          that what separates expert performers is the structure of
-          practice, not raw hours; popularized in Ericsson &amp; Pool’s
-          Peak (2016).
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 04 · Growth & Mastery"
+        title="Deliberate Practice Tracker"
+        meta="SAVED IN THIS BROWSER"
+      >
+        Structured, feedback-driven practice toward one skill over the
+        year — distinct from the once-a-year Misogi event; this is a
+        continuous track. Ericsson, Krampe &amp; Tesch-Römer (1993) found
+        that what separates expert performers is the structure of
+        practice, not raw hours; popularized in Ericsson &amp; Pool’s
+        Peak (2016).
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

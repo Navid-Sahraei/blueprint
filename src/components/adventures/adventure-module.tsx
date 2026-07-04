@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { IdeaBoard } from "@/components/adventures/idea-board";
+import { ModuleHeader } from "@/components/module-header";
 import { IdeaPrompts } from "@/components/adventures/idea-prompts";
 import { SavoringDebrief } from "@/components/adventures/savoring-debrief";
 import { YearCalendar } from "@/components/adventures/year-calendar";
@@ -45,27 +46,20 @@ export function AdventureModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 02 · Big Moves</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Adventure Ledger
-          </h1>
-          <p className="measure text-xs text-dimension">
-            {doneThisYear} / {YEARLY_TARGET} THIS YEAR · SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Six small, novel experiences a year — roughly one every two months.
-          Sometimes called Kevin’s Rule, after a heuristic entrepreneur Jesse
-          Itzler attributes to a friend; the mechanisms behind it are real.
-          Experiences beat material purchases for lasting well-being (Van
-          Boven &amp; Gilovich, 2003), anticipating one is itself a source of
-          happiness (Kumar, Killingsworth &amp; Gilovich, 2014), and novelty
-          counteracts hedonic adaptation (Lyubomirsky, Sheldon &amp; Schkade,
-          2005).
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 02 · Big Moves"
+        title="Adventure Ledger"
+        meta={`${doneThisYear} / ${YEARLY_TARGET} THIS YEAR · SAVED IN THIS BROWSER`}
+      >
+        Six small, novel experiences a year — roughly one every two months.
+        Sometimes called Kevin’s Rule, after a heuristic entrepreneur Jesse
+        Itzler attributes to a friend; the mechanisms behind it are real.
+        Experiences beat material purchases for lasting well-being (Van
+        Boven &amp; Gilovich, 2003), anticipating one is itself a source of
+        happiness (Kumar, Killingsworth &amp; Gilovich, 2014), and novelty
+        counteracts hedonic adaptation (Lyubomirsky, Sheldon &amp; Schkade,
+        2005).
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

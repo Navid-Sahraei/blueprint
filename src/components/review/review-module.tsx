@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
+import { ModuleHeader } from "@/components/module-header";
 import { ReflectionForm } from "@/components/review/reflection-form";
 import { SnapshotView } from "@/components/review/snapshot-view";
 import { Button } from "@/components/ui/button";
@@ -30,24 +32,17 @@ export function ReviewModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 05 · Learning Loop</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Annual / Quarterly Review
-          </h1>
-          <p className="measure text-xs text-dimension">
-            SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Close the loop. Structured reflection after a task measurably
-          improves subsequent performance in both field and lab settings
-          (Di Stefano, Gino, Pisano &amp; Staats, 2016) — the mechanism
-          behind Kolb&rsquo;s experiential learning cycle (1984): experience,
-          reflect, conceptualize, try again.
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 05 · Learning Loop"
+        title="Annual / Quarterly Review"
+        meta="SAVED IN THIS BROWSER"
+      >
+        Close the loop. Structured reflection after a task measurably
+        improves subsequent performance in both field and lab settings
+        (Di Stefano, Gino, Pisano &amp; Staats, 2016) — the mechanism
+        behind Kolb&rsquo;s experiential learning cycle (1984): experience,
+        reflect, conceptualize, try again.
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>
@@ -102,6 +97,15 @@ export function ReviewModule() {
                     }
                   />
                 </div>
+                <p className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
+                  Loop closed.{" "}
+                  <Link
+                    href="/app/goals"
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    Set the next quarter&rsquo;s objective →
+                  </Link>
+                </p>
               </>
             ) : draftSnapshot ? (
               <>

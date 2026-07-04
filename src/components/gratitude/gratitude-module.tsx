@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { ModuleHeader } from "@/components/module-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -64,25 +65,18 @@ export function GratitudeModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 05 · Learning Loop</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Gratitude Practice
-          </h1>
-          <p className="measure text-xs text-dimension">
-            OPTIONAL · SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Three things a week, once a week. The original counting-blessings
-          experiment found gratitude journaling improved subjective
-          well-being (Emmons &amp; McCullough, 2003); later, larger
-          meta-analytic work found the effect is real but more modest than
-          its popular reputation suggests (Davis et al., 2016). This is
-          offered as a small, pleasant practice — not a transformation.
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 05 · Learning Loop"
+        title="Gratitude Practice"
+        meta="OPTIONAL · SAVED IN THIS BROWSER"
+      >
+        Three things a week, once a week. The original counting-blessings
+        experiment found gratitude journaling improved subjective
+        well-being (Emmons &amp; McCullough, 2003); later, larger
+        meta-analytic work found the effect is real but more modest than
+        its popular reputation suggests (Davis et al., 2016). This is
+        offered as a small, pleasant practice — not a transformation.
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

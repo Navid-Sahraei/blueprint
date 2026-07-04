@@ -1,56 +1,21 @@
 import Link from "next/link";
 
+import { AppNav } from "@/components/app-nav";
+
 export default function AppLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-2 sm:px-6">
           <Link
             href="/app/dashboard"
-            className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-primary"
+            className="shrink-0 font-mono text-sm font-semibold uppercase tracking-[0.18em] text-primary"
           >
             Blueprint
           </Link>
-          <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-            <Link href="/app/dashboard" className="hover:text-foreground">
-              Dashboard
-            </Link>
-            <Link href="/app/values" className="hover:text-foreground">
-              Values
-            </Link>
-            <Link href="/app/goals" className="hover:text-foreground">
-              Goals
-            </Link>
-            <Link href="/app/misogi" className="hover:text-foreground">
-              Misogi
-            </Link>
-            <Link href="/app/adventures" className="hover:text-foreground">
-              Adventures
-            </Link>
-            <Link href="/app/deep-work" className="hover:text-foreground">
-              Deep Work
-            </Link>
-            <Link href="/app/practice" className="hover:text-foreground">
-              Practice
-            </Link>
-            <Link href="/app/review" className="hover:text-foreground">
-              Review
-            </Link>
-            <Link href="/app/gratitude" className="hover:text-foreground">
-              Gratitude
-            </Link>
-            <Link href="/app/habits" className="hover:text-foreground">
-              Habits
-            </Link>
-            <Link href="/app/woop" className="hover:text-foreground">
-              WOOP
-            </Link>
-            <Link href="/methods" className="hover:text-foreground">
-              Methods
-            </Link>
-          </nav>
+          <AppNav />
         </div>
       </header>
       <main className="flex-1">{children}</main>

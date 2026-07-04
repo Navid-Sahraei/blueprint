@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { WeekPlanner } from "@/components/deepwork/week-planner";
+import { ModuleHeader } from "@/components/module-header";
 import { WeeklyTrend } from "@/components/deepwork/weekly-trend";
 import { mondayOfWeek, weekDates } from "@/lib/dates";
 import { useDeepWork } from "@/lib/deepwork/use-deep-work";
@@ -24,25 +25,18 @@ export function DeepWorkModule() {
 
   return (
     <div className="space-y-10">
-      <header>
-        <p className="label-technical mb-2">Layer 03 · Execution</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Deep Work &amp; Time Blocking
-          </h1>
-          <p className="measure text-xs text-dimension">
-            {weekHours.toFixed(1)} HRS THIS WEEK · SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          A weekly plan around a small number of high-value, focus-intensive
-          blocks. Switching tasks leaves attention residue — part of your
-          attention stays with the last task, measurably degrading
-          performance on the next one (Leroy, 2009). Blocking contiguous time
-          is the direct countermeasure, popularized by Cal Newport in Deep
-          Work (2016).
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 03 · Execution"
+        title="Deep Work & Time Blocking"
+        meta={`${weekHours.toFixed(1)} HRS THIS WEEK · SAVED IN THIS BROWSER`}
+      >
+        A weekly plan around a small number of high-value, focus-intensive
+        blocks. Switching tasks leaves attention residue — part of your
+        attention stays with the last task, measurably degrading
+        performance on the next one (Leroy, 2009). Blocking contiguous time
+        is the direct countermeasure, popularized by Cal Newport in Deep
+        Work (2016).
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

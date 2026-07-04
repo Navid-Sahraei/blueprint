@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { HabitForm } from "@/components/habits/habit-form";
 import { PipelineBoard } from "@/components/habits/pipeline";
 import { WeeklyReviewSection } from "@/components/habits/weekly-review";
+import { ModuleHeader } from "@/components/module-header";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { currentQuarter, daysBetween } from "@/lib/dates";
@@ -79,25 +80,17 @@ export function HabitFoundry() {
 
   return (
     <div className="space-y-10">
-      {/* Header */}
-      <header>
-        <p className="label-technical mb-2">Layer 04 · Growth &amp; Mastery</p>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="font-mono text-3xl font-semibold text-primary">
-            Habit Foundry
-          </h1>
-          <p className="measure text-xs text-dimension">
-            {currentQuarter()} · SAVED IN THIS BROWSER
-          </p>
-        </div>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          One habit per quarter, installed properly. In the best real-world
-          study of habit formation, automaticity took a median of 66 days to
-          develop — range 18 to 254 (Lally, van Jaarsveld, Potts &amp; Wardle,
-          2010). The popular 21-day figure is a myth; a quarter gives a habit
-          the time it actually needs.
-        </p>
-      </header>
+      <ModuleHeader
+        layer="Layer 04 · Growth & Mastery"
+        title="Habit Foundry"
+        meta={`${currentQuarter()} · SAVED IN THIS BROWSER`}
+      >
+        One habit per quarter, installed properly. In the best real-world
+        study of habit formation, automaticity took a median of 66 days to
+        develop — range 18 to 254 (Lally, van Jaarsveld, Potts &amp; Wardle,
+        2010). The popular 21-day figure is a myth; a quarter gives a habit
+        the time it actually needs.
+      </ModuleHeader>
 
       {!ready ? (
         <p className="measure text-xs text-dimension">LOADING…</p>

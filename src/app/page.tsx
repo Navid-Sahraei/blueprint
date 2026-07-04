@@ -18,7 +18,7 @@ export default function LandingPage() {
             <p className="label-technical mb-6">
               Annual planning system · rev. {new Date().getFullYear()}
             </p>
-            <h1 className="max-w-3xl font-mono text-4xl font-semibold leading-tight tracking-tight text-primary sm:text-5xl">
+            <h1 className="draft-in max-w-3xl font-mono text-4xl font-semibold leading-tight tracking-tight text-primary sm:text-5xl">
               Design your year like a structure.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
