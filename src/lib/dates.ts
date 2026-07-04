@@ -26,6 +26,13 @@ export function shiftQuarter(quarter: string, delta: number): string {
   return `${Math.floor(index / 4)}-Q${(index % 4) + 1}`;
 }
 
+/** Whole days from `from` until an ISO date — negative once it has passed. */
+export function daysUntil(iso: string, from: Date = new Date()): number {
+  const target = new Date(`${iso}T00:00:00`);
+  const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+  return Math.round((target.getTime() - start.getTime()) / 86_400_000);
+}
+
 /** Whole days from an ISO date to `to` (0 on the same day). */
 export function daysBetween(fromISO: string, to: Date = new Date()): number {
   const from = new Date(`${fromISO}T00:00:00`);

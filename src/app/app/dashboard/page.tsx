@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import Link from "next/link";
 
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
+import { MisogiStat } from "@/components/misogi/misogi-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
 import { ValuesStat } from "@/components/values/values-stat";
 import { WoopStat } from "@/components/woop/woop-stat";
@@ -17,6 +18,7 @@ const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "values-compass": { href: "/app/values", Stat: ValuesStat },
   "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
+  misogi: { href: "/app/misogi", Stat: MisogiStat },
   woop: { href: "/app/woop", Stat: WoopStat },
 };
 
