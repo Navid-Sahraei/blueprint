@@ -26,6 +26,9 @@ export default function AppLayout({
             <Link href="/app/misogi" className="hover:text-foreground">
               Misogi
             </Link>
+            <Link href="/app/adventures" className="hover:text-foreground">
+              Adventures
+            </Link>
             <Link href="/app/habits" className="hover:text-foreground">
               Habits
             </Link>

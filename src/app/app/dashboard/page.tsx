@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ComponentType } from "react";
 import Link from "next/link";
 
+import { AdventureStat } from "@/components/adventures/adventure-stat";
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { MisogiStat } from "@/components/misogi/misogi-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
@@ -19,6 +20,7 @@ const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
   "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
   misogi: { href: "/app/misogi", Stat: MisogiStat },
+  "adventure-ledger": { href: "/app/adventures", Stat: AdventureStat },
   woop: { href: "/app/woop", Stat: WoopStat },
 };
 
