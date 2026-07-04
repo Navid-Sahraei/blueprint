@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { HabitFoundryStat } from "@/components/habits/habit-stat";
 import { OkrStat } from "@/components/okrs/okr-stat";
+import { ValuesStat } from "@/components/values/values-stat";
 import { Badge } from "@/components/ui/badge";
 import { LAYERS, methodsByLayer } from "@/lib/methods";
 import { createClient } from "@/lib/supabase/server";
@@ -12,6 +13,7 @@ export const metadata: Metadata = { title: "Dashboard" };
 
 /** Modules with a built interior: dashboard card links in and shows a live stat. */
 const LIVE_MODULES: Record<string, { href: string; Stat: ComponentType }> = {
+  "values-compass": { href: "/app/values", Stat: ValuesStat },
   "habit-foundry": { href: "/app/habits", Stat: HabitFoundryStat },
   "annual-okrs": { href: "/app/goals", Stat: OkrStat },
 };

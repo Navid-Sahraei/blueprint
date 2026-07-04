@@ -18,6 +18,47 @@ export interface LocalStore<T> {
   replace: (rows: T[]) => void;
 }
 
+/** Single-value variant for UI drafts (e.g. a half-finished card sort). */
+export interface LocalValueStore<T> {
+  subscribe: (listener: Listener) => () => void;
+  get: () => T | null;
+  replace: (value: T | null) => void;
+}
+
+export function createLocalValueStore<T>(
+  storageKey: string,
+): LocalValueStore<T> {
+  let cache: T | null | undefined;
+  const listeners = new Set<Listener>();
+
+  return {
+    subscribe(listener) {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+    get() {
+      if (cache === undefined) {
+        if (typeof window === "undefined") return null;
+        try {
+          const raw = window.localStorage.getItem(storageKey);
+          cache = raw ? (JSON.parse(raw) as T) : null;
+        } catch {
+          cache = null;
+        }
+      }
+      return cache;
+    },
+    replace(value) {
+      cache = value;
+      if (typeof window !== "undefined") {
+        if (value === null) window.localStorage.removeItem(storageKey);
+        else window.localStorage.setItem(storageKey, JSON.stringify(value));
+      }
+      for (const listener of listeners) listener();
+    },
+  };
+}
+
 export function createLocalStore<T>(storageKey: string): LocalStore<T> {
   let cache: T[] | null = null;
   const listeners = new Set<Listener>();
