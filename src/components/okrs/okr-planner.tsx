@@ -230,8 +230,26 @@ export function OkrPlanner() {
 
           {/* Year strip */}
           <section>
-            <div className="flex items-baseline justify-between gap-2">
-              <h2 className="label-technical">The year — {year}</h2>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  aria-label="Previous year"
+                  onClick={() => setQuarter(shiftQuarter(quarter, -4))}
+                >
+                  ‹
+                </Button>
+                <h2 className="label-technical">The year — {year}</h2>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  aria-label="Next year"
+                  onClick={() => setQuarter(shiftQuarter(quarter, 4))}
+                >
+                  ›
+                </Button>
+              </div>
               {quarter !== currentQuarter() && (
                 <Button
                   size="sm"

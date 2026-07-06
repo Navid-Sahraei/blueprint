@@ -27,7 +27,7 @@ export function KeyResultRow({
   function startWoop() {
     if (
       getDraft() !== null &&
-      !window.confirm("Replace your in-progress WOOP draft?")
+      !window.confirm("Replace your in-progress Mental Contrasting draft?")
     ) {
       return;
     }
@@ -89,7 +89,7 @@ export function KeyResultRow({
         <Button
           size="sm"
           variant="ghost"
-          title="Plan around this key result's obstacle in WOOP"
+          title="Plan around this key result's obstacle in Mental Contrasting"
           onClick={startWoop}
         >
           If-then plan →

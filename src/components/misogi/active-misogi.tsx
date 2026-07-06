@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { AddToCalendarButton } from "@/components/add-to-calendar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -200,6 +201,15 @@ export function ActiveMisogi({
             <Button size="sm" variant="accent" onClick={() => setDebriefing(true)}>
               It happened — debrief
             </Button>
+            {misogi.event_date && (
+              <AddToCalendarButton
+                event={{
+                  title: `Misogi: ${misogi.title} — Blueprint`,
+                  date: misogi.event_date,
+                  description: `${misogi.category} · fear ${misogi.fear_score}, pull ${misogi.pull_score}`,
+                }}
+              />
+            )}
             <Button
               size="sm"
               variant="ghost"

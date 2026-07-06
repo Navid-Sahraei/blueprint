@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { WoopModule } from "@/components/woop/woop-module";
 
-export const metadata: Metadata = { title: "WOOP / Mental Contrasting" };
+export const metadata: Metadata = { title: "Mental Contrasting" };
 
 export default function WoopPage() {
   return (

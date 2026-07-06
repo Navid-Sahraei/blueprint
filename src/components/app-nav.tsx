@@ -14,7 +14,7 @@ const LINKS = [
   { href: "/app/misogi", label: "Misogi" },
   { href: "/app/adventures", label: "Adventures" },
   { href: "/app/deep-work", label: "Deep Work" },
-  { href: "/app/woop", label: "WOOP" },
+  { href: "/app/woop", label: "Mental Contrasting" },
   { href: "/app/habits", label: "Habits" },
   { href: "/app/practice", label: "Practice" },
   { href: "/app/review", label: "Review" },

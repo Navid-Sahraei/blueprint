@@ -19,6 +19,10 @@ export function mondayOfWeek(d: Date = new Date()): string {
   return todayISO(monday);
 }
 
+export function currentYear(d: Date = new Date()): number {
+  return d.getFullYear();
+}
+
 /** e.g. "2026-07" */
 export function currentMonth(d: Date = new Date()): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;

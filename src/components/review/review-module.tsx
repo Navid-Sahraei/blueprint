@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { AddToCalendarButton } from "@/components/add-to-calendar";
 import { ModuleHeader } from "@/components/module-header";
 import { ReflectionForm } from "@/components/review/reflection-form";
 import { SnapshotView } from "@/components/review/snapshot-view";
 import { Button } from "@/components/ui/button";
-import { currentQuarter, shiftQuarter } from "@/lib/dates";
+import { currentQuarter, shiftQuarter, todayISO } from "@/lib/dates";
 import { buildSummarySnapshot } from "@/lib/review/snapshot";
 import { parseReflection } from "@/lib/review/types";
 import type { PeriodType, SummarySnapshot } from "@/lib/review/types";
@@ -158,16 +159,24 @@ export function ReviewModule() {
                   Pull a snapshot from every module you&rsquo;re running,
                   then write the reflection.
                 </p>
-                <Button
-                  className="mt-4"
-                  onClick={() =>
-                    setDraftSnapshot(
-                      buildSummarySnapshot(periodType, periodLabel),
-                    )
-                  }
-                >
-                  Generate {periodType} review
-                </Button>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Button
+                    onClick={() =>
+                      setDraftSnapshot(
+                        buildSummarySnapshot(periodType, periodLabel),
+                      )
+                    }
+                  >
+                    Generate {periodType} review
+                  </Button>
+                  <AddToCalendarButton
+                    event={{
+                      title: `${periodType === "quarterly" ? "Quarterly" : "Annual"} review · ${periodLabel} — Blueprint`,
+                      date: todayISO(),
+                      description: `Due: ${periodType} review for ${periodLabel}.`,
+                    }}
+                  />
+                </div>
               </div>
             )}
           </section>

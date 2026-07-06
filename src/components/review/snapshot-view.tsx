@@ -58,7 +58,10 @@ export function SnapshotView({ snapshot }: { snapshot: SummarySnapshot }) {
             : ""
         }`}
       />
-      <Stat label="WOOP plans" value={`${snapshot.woop.totalCount} total`} />
+      <Stat
+        label="Mental Contrasting"
+        value={`${snapshot.woop.totalCount} plans total`}
+      />
       <Stat
         label="Deep work"
         value={`${snapshot.deepWorkHours} hrs this period`}

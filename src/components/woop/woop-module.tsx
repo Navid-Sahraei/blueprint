@@ -43,7 +43,7 @@ export function WoopModule() {
     <div className="space-y-10">
       <ModuleHeader
         layer="Layer 03 · Execution"
-        title="WOOP / Mental Contrasting"
+        title="Mental Contrasting"
         meta="SAVED IN THIS BROWSER"
       >
         Wish, Outcome, Obstacle, Plan. Mental contrasting with
@@ -75,11 +75,11 @@ export function WoopModule() {
                   <p className="mt-1 max-w-xl text-sm text-muted-foreground">
                     {entries.length === 0
                       ? "Four steps, a few minutes. Works on any goal — or attach it to a key result from the Goals module."
-                      : "One WOOP per wish. New quarter, new obstacles — run it as often as goals change."}
+                      : "One plan per wish. New quarter, new obstacles — run it as often as goals change."}
                   </p>
                 </div>
                 <Button onClick={() => setDraft(freshWoopDraft())}>
-                  {entries.length === 0 ? "Start your first WOOP" : "New WOOP"}
+                  {entries.length === 0 ? "Start your first plan" : "New plan"}
                 </Button>
               </div>
             </section>
@@ -156,12 +156,13 @@ export function WoopModule() {
 
           <footer className="border-t border-border pt-6">
             <p className="max-w-2xl text-sm text-muted-foreground">
-              WOOP was developed by Gabriele Oettingen and summarized for a
-              general audience in Rethinking Positive Thinking (2014). The
-              plan step is an implementation intention (Gollwitzer, 1999) —
-              the meta-analytic effect across 94 studies is d ≈ 0.65
-              (Gollwitzer &amp; Sheeran, 2006), which is why the same if-then
-              move appears in Habit Foundry.
+              Mental Contrasting — popularly known by its acronym WOOP — was
+              developed by Gabriele Oettingen and summarized for a general
+              audience in Rethinking Positive Thinking (2014). The plan step
+              is an implementation intention (Gollwitzer, 1999) — the
+              meta-analytic effect across 94 studies is d ≈ 0.65 (Gollwitzer
+              &amp; Sheeran, 2006), which is why the same if-then move
+              appears in Habit Foundry.
             </p>
           </footer>
         </>

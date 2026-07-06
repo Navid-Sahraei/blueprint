@@ -9,7 +9,7 @@ import { LAYERS, methodsByLayer } from "@/lib/methods";
 export const metadata: Metadata = {
   title: "Methods & sources",
   description:
-    "The ten methods inside Blueprint, organized in five layers — each with the research and practitioner sources behind it, cited by author, year, and publication.",
+    "The eleven methods inside Blueprint, organized in five layers — each with the research and practitioner sources behind it, cited by author, year, and publication.",
 };
 
 export default function MethodsPage() {
@@ -20,7 +20,7 @@ export default function MethodsPage() {
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
           <p className="label-technical mb-4">Methods &amp; sources</p>
           <h1 className="font-mono text-3xl font-semibold text-primary sm:text-4xl">
-            Ten methods. Every one shows its work.
+            Eleven methods. Every one shows its work.
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             Blueprint separates two kinds of grounding and labels them

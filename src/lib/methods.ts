@@ -134,7 +134,7 @@ export const METHODS: Method[] = [
     features: [
       "Quarterly objective + key result builder",
       "Weekly percent-complete check-ins",
-      "Key results linkable to WOOP plans and reviews",
+      "Key results linkable to Mental Contrasting plans and reviews",
     ],
     freeTier: false,
   },
@@ -246,14 +246,14 @@ export const METHODS: Method[] = [
   },
   {
     slug: "woop",
-    name: "WOOP / Mental Contrasting",
+    name: "Mental Contrasting",
     route: "/app/woop",
     layerId: 3,
     tagline: "Wish, Outcome, Obstacle, Plan — a goal becomes an if-then plan.",
     description:
-      "A guided four-step exercise that takes any goal and produces a concrete if-then implementation plan. Attach a WOOP to any objective or key result, or run it standalone.",
+      "A guided four-step exercise that takes any goal and produces a concrete if-then implementation plan. Attach a plan to any objective or key result, or run it standalone.",
     whyItWorks:
-      "WOOP (mental contrasting with implementation intentions) is one of the most rigorously tested motivation techniques in the literature, with randomized controlled trials across health, academic, and interpersonal domains. Its 'Plan' step is an implementation intention — the meta-analytic effect across 94 studies is medium-to-large (d ≈ 0.65).",
+      "Mental contrasting with implementation intentions — popularly known by its acronym WOOP, from psychologist Gabriele Oettingen — is one of the most rigorously tested motivation techniques in the literature, with randomized controlled trials across health, academic, and interpersonal domains. Its 'Plan' step is an implementation intention — the meta-analytic effect across 94 studies is medium-to-large (d ≈ 0.65).",
     sources: [
       {
         kind: "peer-reviewed",

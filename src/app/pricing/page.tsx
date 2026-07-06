@@ -11,18 +11,18 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Start free with the Habit Foundry and method previews. Blueprint Pro unlocks all ten methods, the cross-module dashboard, and data export.",
+    "Start free with the Habit Foundry and method previews. Blueprint Pro unlocks all eleven methods, the cross-module dashboard, and data export.",
 };
 
 const FREE_FEATURES = [
   "Habit Foundry — the full module, free forever",
   "Read-only previews of all other modules (real UI, sample data)",
   "Annual reflection template (light version)",
-  "All ten method pages with full source citations",
+  "All eleven method pages with full source citations",
 ];
 
 const PRO_FEATURES = [
-  "All ten modules across all five layers",
+  "All eleven modules across all five layers",
   "Cross-module dashboard — your year at a glance",
   "Quarterly review auto-populated from every module",
   "Data export (CSV / JSON) for every module",
@@ -83,10 +83,11 @@ export default function PricingPage() {
                 <Badge variant="accent">Full system</Badge>
               </div>
               <p className="measure mt-4 text-4xl font-semibold text-primary">
-                $9<span className="text-lg text-muted-foreground">/mo</span>
+                $79<span className="text-lg text-muted-foreground">/year</span>
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
-                or $79/year — commit to the year, save about 27%
+                One annual plan — no monthly option. Blueprint is a system for
+                planning a year; the pricing follows its own logic.
               </p>
               <ul className="mt-8 space-y-3">
                 {PRO_FEATURES.map((feature) => (
@@ -112,9 +113,20 @@ export default function PricingPage() {
           </div>
 
           <p className="mt-10 text-sm text-muted-foreground">
-            The annual plan&apos;s discount is deliberate: Blueprint is built
-            around an annual commitment, and the pricing follows its own
-            philosophy.
+            Billed once a year, cancel anytime before renewal — no monthly
+            plan, because a system for designing your year shouldn&apos;t
+            bill you like a gym membership.
+          </p>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Prefer paper?{" "}
+            <a href="#pdf-coming-soon" className="text-primary underline-offset-4 hover:underline">
+              Get the printable planner
+            </a>
+            . Live in Notion?{" "}
+            <a href="#notion-coming-soon" className="text-primary underline-offset-4 hover:underline">
+              Use it in Notion
+            </a>
+            .
           </p>
         </div>
       </main>

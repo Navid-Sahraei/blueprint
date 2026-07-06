@@ -107,7 +107,7 @@ export function WoopWizard({
               </select>
               {krOptions.length === 0 && (
                 <p className="text-xs text-muted-foreground">
-                  No key results yet — WOOP works standalone too.
+                  No key results yet — Mental Contrasting works standalone too.
                 </p>
               )}
             </div>

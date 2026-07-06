@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAdventures } from "@/lib/adventures/use-adventures";
 import { TYPE_LABEL, YEARLY_TARGET, type AdventureType } from "@/lib/adventures/types";
+import { currentYear } from "@/lib/dates";
 
 export function AdventureModule() {
   const {
@@ -26,13 +27,14 @@ export function AdventureModule() {
   const [title, setTitle] = useState("");
   const [type, setType] = useState<AdventureType | "">("");
   const [debriefingId, setDebriefingId] = useState<string | null>(null);
+  const [viewYear, setViewYear] = useState(currentYear());
 
-  const year = new Date().getFullYear();
+  const thisYear = currentYear();
   const doneThisYear = adventures.filter(
     (a) =>
       a.status === "done" &&
       a.target_date &&
-      new Date(`${a.target_date}T00:00:00`).getFullYear() === year,
+      new Date(`${a.target_date}T00:00:00`).getFullYear() === thisYear,
   ).length;
   const debriefing = adventures.find((a) => a.id === debriefingId) ?? null;
 
@@ -127,9 +129,36 @@ export function AdventureModule() {
           </section>
 
           <section>
-            <h2 className="label-technical">The year — {year}</h2>
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant="ghost"
+                aria-label="Previous year"
+                onClick={() => setViewYear((y) => y - 1)}
+              >
+                ‹
+              </Button>
+              <h2 className="label-technical">The year — {viewYear}</h2>
+              <Button
+                size="sm"
+                variant="ghost"
+                aria-label="Next year"
+                onClick={() => setViewYear((y) => y + 1)}
+              >
+                ›
+              </Button>
+              {viewYear !== thisYear && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setViewYear(thisYear)}
+                >
+                  Jump to current year
+                </Button>
+              )}
+            </div>
             <div className="mt-4">
-              <YearCalendar adventures={adventures} year={year} />
+              <YearCalendar adventures={adventures} year={viewYear} />
             </div>
           </section>
 

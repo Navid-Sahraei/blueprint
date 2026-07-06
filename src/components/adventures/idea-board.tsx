@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { AddToCalendarButton } from "@/components/add-to-calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { todayISO } from "@/lib/dates";
@@ -130,6 +131,16 @@ function AdventureCard({
               It happened
             </Button>
           )}
+          {(adventure.status === "scheduled" || adventure.status === "booked") &&
+            adventure.target_date && (
+              <AddToCalendarButton
+                event={{
+                  title: `${adventure.title} — Blueprint`,
+                  date: adventure.target_date,
+                  description: adventure.type ? `Adventure — ${adventure.type}` : "Adventure",
+                }}
+              />
+            )}
           {adventure.status !== "done" && (
             <Button size="sm" variant="outline" onClick={() => setEditing(true)}>
               Edit
